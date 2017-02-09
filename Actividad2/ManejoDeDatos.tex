@@ -1,0 +1,162 @@
+\documentclass[a4paper]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage[a4paper,top=3cm,bottom=1.5cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\title{Preparación de datos}
+\author{Paul D. Cañez Moranda}
+\begin{document}
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\center
+\textsc{\LARGE Universidad de Sonora}\\[1cm]
+\HRule \\[0.4cm]
+{ \huge \bfseries Actividad No.2 }\\[0.4cm]
+{ \huge \bfseries Uso de Emacs para el manejo de datos }\\[0.4cm]
+\HRule \\[1.1cm]
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Alumno:}\\
+
+Paul Cañez Miranda
+
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Profesor:} \\
+Carlos Lizzárraga Celaya 
+\end{flushright}
+\end{minipage}\\[0.5cm]
+{\large \today}\\[1cm] 
+\begin{center}
+\includegraphics[width=8cm]{unison.png}
+\end{center}
+\end{titlepage}
+
+\newpage 
+\begin{abstract}
+Este trabajo consistió en el manejo de datos utilizando el editor script's en Emacs. Este script nos sirve para descargar datos desde el lugar que queramos. El editor Emacs lo utilizamos para manejar los datos de forma práctica. \\ El tipo de datos que se manejaron fueron de las características relevantes de la atmósfera. \\ \\
+\end{abstract}
+
+\section*{Introducción}
+Los globos meteorológicos son de gran ayuda para el estudio de la atmósfera, clima, etc. Hoy día es el mejor instrumento para obtener información acerca de nuestra atmósfera. Estos globos alcanzan alturas que van de los 10 a 20 km de altura, por lo que la información provienente es en su totalidad de la Tropósfera; más allá de esta capa, los globos revientan. El globo se le adhiere un sensor que es el que mide la temperatura, presión, rapidez y dirección del viento, etc.\\
+Cabe mencionar, que los globos se envían en horas específicas; que corresponden a las 00Z y 12Z. \\
+En la suguiente imagen se muestra un globo meteorológico a punto de ser lanzado. \\ \\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{GloboM.jpg}
+\end{center}
+\caption{La caja blanca en la parte inferior, es el sensor.}
+\end{figure}
+
+\newpage
+\section*{Datos del 1 de Febrero del 2016}
+Analizaremos los datos obtenidos por la universidad de Wyoming de un globo meteorológico lanzado desde Acapulco, Guerrero. Los datos serán del día 1 de Febrero del 2017, lanzado a las 12Z. \\  
+Para analizar mejor estos datos realizaremos dos gráficas, una que muestre el comportamiento de la temperatura conforme la altura aumenta; y la otra que muestre la relación que tiene la presión con la altura.  \
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{PresionAltura.png}
+\end{center}
+\caption{P(h)}
+\end{figure}
+
+En la Figura 1 se aprecia cómo la presión decae exponencialmente cuando la altura aumenta. Esto lo predice la teaoría, y con la imagen vemos que se cumple casi de manera exacta. \\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=10cm]{TemperaturaAltura.png}
+\end{center}
+\caption{T(h)}
+\end{figure}
+
+En la Figura 2, observamos el comportamiento de la temperatura en función de la altura. A diferencia de la preción, la temperatura se comporta de manera menos uniforme; se vé como en la superficie tiene un valor, después desciende y luego vuelve a subir. Vemos que esta relación describe una curva muy parecida a la que predice la teoría.
+
+\section*{Datos de 2016}
+Esta sección consiste en descargar, usando nuevamente el script "script1.sh", los datos obtenidos por un globo meteorológico durante un año. Con esta información crearemos una tabla donde se muestre el número de datos (cada dato corresponde a un globo) enviados durante un mes y, la hora a la que fueron enviados. 
+
+\section*{Tabla de datos 2016}
+\begin{table}[htbp]
+\begin{center}
+\resizebox{!}{4.5cm}{
+\begin{tabular}{|l|l|l|}
+\hline 
+Mes & 00Z & 12Z \\ \hline
+Enero & 0 & 22 \\ \hline
+Febrero & 0 & 18\\ \hline
+Marzo & 0 & 26\\ \hline
+Abril & 0 & 29 \\ \hline
+Mayo & 0 & 15 \\ \hline
+Junio & 0 & 26 \\ \hline
+Julio & 0 & 29 \\ \hline
+Agosto & 0 & 28 \\ \hline
+Septiembre & 0 & 29 \\ \hline
+Octubre & 21 & 30 \\ \hline
+Noviembre & 27 & 30 \\ \hline
+Diciembre & 0 & 0 \\ \hline
+\end{tabular}}
+\caption{observaciones realizadas a las 00Z y 12Z horas.}
+\end{center}
+
+\end{table}
+
+En la tabla podemos observar que la mayoría de globos se envían a las 12Z. También se observa que en los meses de Octubre y Noviembre, aumenta el número de globos enviados, siendo 51 y 57 el número de datos por mes, respectivamente. \\
+También se observa que en Diciembre no hay lanzamientos. Desconosco la razón por la que esto ocurra, pero sería interesante saberlo.
+
+\newpage
+\section*{Pasos realizados}
+El script utilizado (script1.sh) para descargar los archivos con datos, consistió en una serie de de comandos descritos a continuación:
+\begin{verbatim}
+
+# Descarga por mes. Cambiar año de consulta. Ajustar el numero de estacion.
+#!/bin/bash
+
+ 
+# Despues de editar: chmod 755 script1.sh
+# Para ejecutar: ./script1.sh
+
+IFS=":"
+LISTM31="01:03:05:07:08:10:12"
+#LISTM31="01:03:05:07"
+LISTM30="04:06:09:11"
+#LISTM30="04:06"
+LISTM28="02"
+
+ 
+# Script para bajar info por mes. Año 2016, dentro del URL:  YEAR=2015
+# Months 31 days
+for i in $LISTM31 ; do
+/usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2016&MONTH=$i&FROM=0100&TO=3112&STNM=76692"
+/bin/sleep 5
+
+done
+
+# Months 30 days
+for i in $LISTM30 ; do
+/usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2016&MONTH=$i&FROM=0100&TO=3012&STNM=76692"
+/bin/sleep 5
+       
+done
+
+# Feb. 28 days
+for i in $LISTM28 ; do
+/usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2016&MONTH=$i&FROM=0100&TO=2812&STNM=76692"
+/bin/sleep 5
+       
+done
+
+\end{verbatim}
+Este script indica los pasos realizados para descargar cada dato de cada fecha específica, sólo modificando las fechas que estén escritas por fechas las deseadas.
+
+\newpage 
+\section*{Conclusión}
+Los script son de gran ayuda para descargar datos de forma muy rápida. Emacs, por su parte, es un editor con muchas funciones que no conocía, y que son de gran utilidad en el manejo de datos. 
+
+\begin{thebibliography}{5}
+\bibitem{a1} \textsc{http://weather.uwyo.edu}, University of Wyoming.
+\bibitem{a2} \textsc{http://interbases.blogspot.mx}, Ozonosondeo.
+\end{thebibliography}
+
+\end{document}
